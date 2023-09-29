@@ -22,8 +22,8 @@ def part1():
         elf2_sections = elf_sections(elf2)
 
         if (
-            all(section in elf2_sections for section in elf1_sections)
-            or all(section in elf1_sections for section in elf2_sections)
+            any(section in elf2_sections for section in elf1_sections)
+            or any(section in elf1_sections for section in elf2_sections)
         ):
             fully_contained_count += 1
 
@@ -32,5 +32,4 @@ def part1():
 
 print(part1()) # first try woop woop!
 
-
-print(part2())
+# part2 changed all() to any()
