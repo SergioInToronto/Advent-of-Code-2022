@@ -2,16 +2,6 @@ use std::collections::HashMap;
 use std::fs;
 
 
-// const throw_score: HashMap<String, u32> = HashMap::from([
-//     ("A", 1), // Rock
-//     ("B", 2), // Paper
-//     ("C", 3), // Scissors
-//     ("X", 1), // Rock
-//     ("Y", 2), // Paper
-//     ("Z", 3), // Scissors
-// ]);
-
-
 fn outcome_score(p1: &String, p2: &String) -> u32 {
     // WIN: 6
     // DRAW: 3
@@ -26,16 +16,7 @@ fn outcome_score(p1: &String, p2: &String) -> u32 {
 }
 
 
-fn part1(contents: String) -> u32 {
-    let throw_score: HashMap<String, u32> = HashMap::from([
-        ("A".to_string(), 1), // Rock
-        ("B".to_string(), 2), // Paper
-        ("C".to_string(), 3), // Scissors
-        ("X".to_string(), 1), // Rock
-        ("Y".to_string(), 2), // Paper
-        ("Z".to_string(), 3), // Scissors
-    ]);
-
+fn part1(contents: String, throw_score: HashMap<String, u32>) -> u32 {
     let mut total_score: u32 = 0;
     for row in contents.trim_end().split("\n") {
         // dbg!(row);
@@ -59,7 +40,16 @@ fn part1(contents: String) -> u32 {
 fn main() {
     let contents = fs::read_to_string("input.txt").expect("Failed to read file");
 
-    let total_score = part1(contents);
+    let throw_score: HashMap<String, u32> = HashMap::from([
+        ("A".to_string(), 1), // Rock
+        ("B".to_string(), 2), // Paper
+        ("C".to_string(), 3), // Scissors
+        ("X".to_string(), 1), // Rock
+        ("Y".to_string(), 2), // Paper
+        ("Z".to_string(), 3), // Scissors
+    ]);
+
+    let total_score = part1(contents, throw_score);
     println!("Part1: Total score: {}", total_score);
     // First run gave wrong answer: 9977. I had the round score backwards. Player2 is us, so "B X" is a loss.
 }
