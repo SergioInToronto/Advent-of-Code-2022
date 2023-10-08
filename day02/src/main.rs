@@ -2,7 +2,7 @@ use std::collections::HashMap;
 use std::fs;
 
 
-fn outcome_score(p1: &String, p2: &String) -> u32 {
+fn outcome_score(p1: &str, p2: &str) -> u32 {
     // WIN: 6
     // DRAW: 3
     // LOSS: 0
@@ -16,7 +16,7 @@ fn outcome_score(p1: &String, p2: &String) -> u32 {
 }
 
 
-fn part1(contents: String, throw_score: HashMap<String, u32>) -> u32 {
+fn part1(contents: String, throw_score: HashMap<&str, u32>) -> u32 {
     let mut total_score: u32 = 0;
     for row in contents.trim_end().split("\n") {
         // dbg!(row);
@@ -27,8 +27,8 @@ fn part1(contents: String, throw_score: HashMap<String, u32>) -> u32 {
         // dbg!(parts);
         // println!("({}, {})", &parts[0], &parts[1]);
 
-        let play1 = &row[0..1].to_string();
-        let play2 = &row[2..3].to_string();
+        let play1 = &row[0..1];
+        let play2 = &row[2..3];
         let play_score = outcome_score(play1, play2) + throw_score.get(play2).unwrap();
         // println!("Play score: {} (Outcom: {}, my throw: {})", play_score, outcome_score(play1, play2), throw_score.get(play2).unwrap());
         total_score = total_score + play_score;
@@ -40,13 +40,13 @@ fn part1(contents: String, throw_score: HashMap<String, u32>) -> u32 {
 fn main() {
     let contents = fs::read_to_string("input.txt").expect("Failed to read file");
 
-    let throw_score: HashMap<String, u32> = HashMap::from([
-        ("A".to_string(), 1), // Rock
-        ("B".to_string(), 2), // Paper
-        ("C".to_string(), 3), // Scissors
-        ("X".to_string(), 1), // Rock
-        ("Y".to_string(), 2), // Paper
-        ("Z".to_string(), 3), // Scissors
+    let throw_score: HashMap<&str, u32> = HashMap::from([
+        ("A", 1), // Rock
+        ("B", 2), // Paper
+        ("C", 3), // Scissors
+        ("X", 1), // Rock
+        ("Y", 2), // Paper
+        ("Z", 3), // Scissors
     ]);
 
     let total_score = part1(contents, throw_score);
