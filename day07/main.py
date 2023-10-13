@@ -46,7 +46,7 @@ for line in lines:
     elif line == '$ cd ..':
         popd()
     elif line.startswith('$ cd '):
-        _, _, dir_name = line.split()
+        _, _, dir_name = line.split(" ");
         pushd(dir_name)
     elif line.startswith('dir '):
         _, dir_name = line.split()
