@@ -76,8 +76,9 @@ for x, row in enumerate(forest):
         left_score = calc_score(tree, trees_left)
         right_score = calc_score(tree, trees_right)
         total_score = up_score * down_score * left_score * right_score
-        if x == 2 and y == 6:
-            breakpoint()
+        if x == 20 and y == 6:
+            print(left_score, right_score, up_score, down_score)
+            # breakpoint()
         tree_scores.append(total_score)
 
 print(f"Best tree score: {max(tree_scores)}")
